@@ -94,12 +94,23 @@ function initBackToTop() {
 /* ======================================
    工具函数
    ====================================== */
-function navigateToTab(tab) {
+function navigateToTab(tab, bizTarget) {
+    // 切换主导航Tab
     document.querySelectorAll('.nav-tab').forEach(t => {
         t.classList.toggle('active', t.dataset.tab === tab);
     });
     document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
     document.getElementById(tab).classList.add('active');
+    
+    // 如果指定了业务专题，切换到对应专题
+    if (bizTarget) {
+        document.querySelectorAll('.biz-tab').forEach(t => {
+            t.classList.toggle('active', t.dataset.target === bizTarget);
+        });
+        document.querySelectorAll('.biz-detail').forEach(d => d.classList.remove('active'));
+        document.getElementById('detail-' + bizTarget).classList.add('active');
+    }
+    
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
